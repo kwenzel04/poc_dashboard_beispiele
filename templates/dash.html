@@ -1,0 +1,523 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="container-fluid pt-25">
+
+
+        <!-- Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">KuV-Adapter Status</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body pb-0">
+                            <div class="row">
+                                <div class="col-sm-2 col-sm-offset-1 mb-15">
+                                    <span id="pie_chart_vorverarbeitung" class="easypiechart skill-circle" data-percent="100">
+                                        <span class="skill-head skill-head-inside">Vorverarbeitung</span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 mb-15">
+                                    <span id="pie_chart_regel" class="easypiechart skill-circle" data-percent="100">
+                                        <span class="skill-head skill-head-inside">Regelverträge</span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 mb-15">
+                                    <span id="pie_chart_bca" class="easypiechart skill-circle" data-percent="100">
+                                        <span class="skill-head skill-head-inside">BCA</span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 mb-15">
+                                    <span id="pie_chart_spring" class="easypiechart skill-circle" data-percent="100">
+                                        <span class="skill-head skill-head-inside">SPRING</span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 mb-15">
+                                    <span id="pie_chart_cvs" class="easypiechart skill-circle" data-percent="100">
+                                        <span class="skill-head skill-head-inside">CVS</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="label-chatrs text-center mt-30 mb-20">
+                                <div class="inline-block mr-15">
+                                    <span class="clabels inline-block bg-pie-green mr-5"></span>
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font">Hochgefahren</span>
+                                </div>
+                                <div class="inline-block mr-15">
+                                    <span class="clabels inline-block bg-pie-blue mr-5"></span>
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font">Soll hochgefahren werden</span>
+                                </div>
+                                <div class="inline-block mr-15">
+                                    <span class="clabels inline-block bg-pie-red mr-5"></span>
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font">Runtergefahren</span>
+                                </div>
+                                <div class="inline-block mr-15">
+                                    <span class="clabels inline-block bg-grey mr-5"></span>
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font">No Data</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+
+        <!-- Row -->
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Status weiterer Adapter</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+			<div class="panel-body">
+                            <div>
+				<span class="pull-left inline-block capitalize-font txt-dark">
+                                    KuV-Rechnungsvereinbarung
+				</span>
+				<span class="label label-default uppercase-font pull-right" id="status_RV">No Data</span>
+				<div class="clearfix"></div>
+				<hr class="light-grey-hr row mt-20 mb-25">
+                                <span class="pull-left inline-block capitalize-font txt-dark">
+                                    KuV-Rechnungsformat
+				</span>
+				<span class="label label-default uppercase-font pull-right" id="status_RF">No Data</span>
+				<div class="clearfix"></div>
+				<hr class="light-grey-hr row mt-20 mb-25">
+                                <span class="pull-left inline-block capitalize-font txt-dark">
+                                    KuV-Einmalentgelt
+				</span>
+				<span class="label label-default uppercase-font pull-right" id="status_EE">No Data</span>
+				<div class="clearfix"></div>
+				<hr class="light-grey-hr row mt-20 mb-25">
+                                <span class="pull-left inline-block capitalize-font txt-dark">
+                                    KuV-Lesen-Vertragsbestand
+				</span>
+				<span class="label label-default uppercase-font pull-right" id="status_LV">No Data</span>
+				<div class="clearfix"></div>
+                            </div>
+			</div>	
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Durchsatz in den letzten 24h</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div class="label-chatrs">
+                                <div class="">
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span
+                                            class="block font-15 weight-500 mb-5">Regelverträge</span><span
+                                                class="block txt-grey" id="tagesdurchsatzregel">No-Data</span></span>
+                                    <div id="sparkline_durchsatz_regel" class="sp-small-chart pull-right" data-toggle="modal" data-target=".modal-kuvregel-durch-und-fehler" style="cursor: pointer;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <hr class="light-grey-hr row mt-10 mb-15" />
+                            <div class="label-chatrs">
+                                <div class="">
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span
+                                            class="block font-15 weight-500 mb-5">BCA</span><span
+                                            class="block txt-grey" id="tagesdurchsatzbca">No-Data</span></span>
+                                    <div id="sparkline_durchsatz_bca" class="sp-small-chart pull-right" data-toggle="modal" data-target=".modal-kuvbca-durch-und-fehler" style="cursor: pointer;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <hr class="light-grey-hr row mt-10 mb-15" />
+                            <div class="label-chatrs">
+                                <div class="">
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span
+                                            class="block font-15 weight-500 mb-5">Spring</span><span
+                                            class="block txt-grey" id="tagesdurchsatzspring">No-Data</span></span>
+                                    <div id="sparkline_durchsatz_spring" class="sp-small-chart pull-right" data-toggle="modal" data-target=".modal-kuvspring-durch-und-fehler" style="cursor: pointer;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <hr class="light-grey-hr row mt-10 mb-15" />
+                            <div class="label-chatrs">
+                                <div class="">
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span
+                                            class="block font-15 weight-500 mb-5">CVS</span><span
+                                            class="block txt-grey" id="tagesdurchsatzcvs">No-Data</span></span>
+                                    <div id="sparkline_durchsatz_cvs" class="sp-small-chart pull-right" data-toggle="modal" data-target=".modal-kuvcvs-durch-und-fehler" style="cursor: pointer;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Fehlerquote (%) in den letzten 24h</h6>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+
+                            <div class="label-chatrs">
+                                <div class="">
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span
+                                            class="block font-15 weight-500 mb-5">Regelverträge</span><span
+                                            class="block txt-grey" id="fehlerquoteregel">No-Data</span></span>
+                                    <div id="sparkline_fehler_regel" class="sp-small-chart pull-right" data-toggle="modal" data-target=".modal-kuvregel-durch-und-fehler" style="cursor: pointer;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <hr class="light-grey-hr row mt-10 mb-15" />
+                            <div class="label-chatrs">
+                                <div class="">
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span
+                                            class="block font-15 weight-500 mb-5">BCA</span><span
+                                            class="block txt-grey" id="fehlerquotebca">No-Data</span></span>
+                                    <div id="sparkline_fehler_bca" class="sp-small-chart pull-right" data-toggle="modal" data-target=".modal-kuvbca-durch-und-fehler" style="cursor: pointer;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <hr class="light-grey-hr row mt-10 mb-15" />
+                            <div class="label-chatrs">
+                                <div class="">
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span
+                                            class="block font-15 weight-500 mb-5">Spring</span><span
+                                            class="block txt-grey" id="fehlerquotespring">No-Data</span></span>
+                                    <div id="sparkline_fehler_spring" class="sp-small-chart pull-right" data-toggle="modal" data-target=".modal-kuvspring-durch-und-fehler" style="cursor: pointer;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                                        �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ecvs">No-Data</span></span>
+                                    <div id="sparkline_fehler_cvs" class="sp-small-chart pull-right" data-toggle="modal" data-target=".modal-kuvcvs-durch-und-fehler" style="cursor: pointer;"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+
+        <!-- Row -->
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view panel-refresh">
+                    <div class="refresh-container">
+                        <div class="la-anim-1"></div>
+                    </div>
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Aktueller Füllstand der Queues</h6>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block refresh mr-15">
+                                <i class="zmdi zmdi-replay"></i>
+                            </a>
+                            <div class="pull-left inline-block dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+                                    role="button"><i class="zmdi zmdi-more-vert"></i></a>
+                                <ul class="dropdown-menu bullet dropdown-menu-right" role="menu">
+                                    <li role="presentation"><a href="javascript:void(0)" role="menuitem"><i
+                                                class="icon wb-reply" aria-hidden="true"></i>option 1</a></li>
+                                    <li role="presentation"><a href="javascript:void(0)" role="menuitem"><i
+                                                A@@QR  !AAB       "           D$@PR  "      Ab   # $ . 	                                        J@  0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     �                                                                                                                                                                    Q                                                                            <div class="inline-block mr-15">
+                                    <span class="clabels inline-block bg-light-magenta mr-5"></span>
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font">BCA-Queue</span>
+                                </div>
+                                <div class="inline-block">
+                                    <span class="clabels inline-block bg-xtra-light-magenta mr-5"></span>
+                                    <span
+                                        class="clabels-text font-12 inline-block txt-dark capitalize-font">CVS-Queue</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view pa-0">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body pa-20">
+                            <div class="sm-data-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+                                            <span class="txt-dark block counter"><span
+                                                    class="counter-anim counter-anim-regel" id="queue_regel_akt">-</span></span>
+                                            <span class="weight-500 uppercase-font block font-13">Messages in
+                                                Regel-Queue</span>
+                                        </div>
+                                        <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+                                            <i class="icon-layers data-right-rep-icon txt-dark-magenta"></i>
+                                        </div>
+                                    </div>
+                                    <ul class="flex-stat mt-5 mb-10">
+                                        <li>
+                                            <span class="block">Vorstunde</span>
+                                            <span class="block weight-500 font-15" id="queue_regel_ver">-</span>
+                                        </li>
+                                        <li>
+                                            <span class="block">Differenz</span>
+                                            <span class="block weight-500 font-15" id="queue_regel_diff">-</span>
+                                        </li>
+                                        <li>
+                                            <span class="block">Trend</span>
+                                            <span class="block">
+                                                <i class="zmdi zmdi-trending-up font-20" id="queue_regel_tend"></i>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default card-view pa-20">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body pa-0">
+                            <div class="sm-data-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+                                            <span class="txt-dark block counter"><span
+                                                    class="counter-anim counter-anim-spring" id="queue_spring_akt">-</span></span>
+                                            <span class="weight-500 uppercase-font block font-13">Messages in
+                                                SPRING-Queue</span>
+                                        </div>
+                                        <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+                                            <i class="icon-layers data-right-rep-icon txt-magenta"></i>
+                                        </div>
+                                    </div>
+                                    <ul class="flex-stat mt-5 mb-10">
+                                        <li>
+                                            <span class="block">Vorstunde</span>
+                                            <span class="block weight-500 font-15" id="queue_spring_ver">-</span>
+                                        </li>
+                                        <li>
+                                            <span class="block">Differenz</span>
+                                            <span class="block weight-500 font-15" id="queue_spring_diff">-</span>
+                                        </li>
+                                        <li>
+                                            <span class="block">Trend</span>
+                                            <span class="block">
+                                                <i class="zmdi zmdi-trending-up font-20" id="queue_spring_tend"></i>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view pa-0">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body pa-20">
+                            <div class="sm-data-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+                                            <span class="txt-dark block counter"><span
+                                                    class="counter-anim counter-anim-bca" id="queue_bca_akt">-</span></span>
+                                            <span class="weight-500 uppercase-font block font-13">Messages in
+                                                BCA-Queue</span>
+                                        </div>
+                                        <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+                                            <i class="icon-layers data-right-rep-icon txt-light-magenta"></i>
+                                        </div>
+                                    </div>
+                                    <ul class="flex-stat mt-5 mb-10">
+                                        <li>
+                                            <span class="block">Vorstunde</span>
+                                            <span class="block weight-500 font-15" id="queue_bca_ver">-</span>
+                                        </li>
+                                        <li>
+                                            <span class="block">Differenz</span>
+                                            <span class="block weight-500 font-15" id="queue_bca_diff">-</span>
+                                        </li>
+                                        <li>
+                                            <span class="block">Trend</span>
+                                            <span class="block">
+                                                <i class="zmdi zmdi-trending-down font-20" id="queue_bca_tend"></i>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default card-view pa-20">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body pa-0">
+                            <div class="sm-data-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+                                            <span class="txt-dark block counter"><span
+                                                    class="counter-anim counter-anim-cvs" id="queue_cvs_akt">-</span></span>
+                                            <span class="weight-500 uppercase-font block font-13">Messages in
+                                                CVS-Queue</span>
+                                        </div>
+                                        <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+                                            <i class="icon-layers data-right-rep-icon txt-xtra-light-magenta"></i>
+                                        </div>
+                                    </div>
+                                    <ul class="flex-stat mt-5 mb-10">
+                                        <li>
+                                            <span class="block">Vorstunde</span>
+                                            <span class="block weight-500 font-15" id="queue_cvs_ver">-</span>
+                                        </li>
+                                        <li>
+                                            <span class="block">Differenz</span>
+                                            <span class="block weight-500 font-15" id="queue_cvs_diff">-</span>
+                                        </li>
+                                        <li>
+                                            <span class="block">Trend</span>
+                                            <span class="block">
+                                                <i class="zmdi zmdi-trending-down font-20" id="queue_cvs_tend"></i>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <div class="modal fade modal-kuvregel-durch-und-fehler" tabindex="-1" role="dialog" aria-labelledby="ModalLabelRegel" aria-hidden="true" style="display: none;" id="regelmodal" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 class="modal-title" id="ModalLabelRegel">KuV Regelverträge Durchsatz & Fehler</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div id="morris_chart_regel" class="morris-chart"></div>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default text-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    
+    <div class="modal fade modal-kuvbca-durch-und-fehler" tabindex="-1" role="dialog" aria-labelledby="ModalLabelBCA" aria-hidden="true" style="display: none;" id="bcamodal" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 class="modal-title" id="ModalLabelBCA">KuV BCA-Verträge Durchsatz & Fehler</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div id="morris_chart_bca" class="morris-chart"></div>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default text-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    
+    <div class="modal fade modal-kuvspring-durch-und-fehler" tabindex="-1" role="dialog" aria-labelledby="ModalLabelSpring" aria-hidden="true" style="display: none;" id="springmodal" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 class="modal-title" id="ModalLabelSpring">KuV SPRING-Verträge Durchsatz & Fehler</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div id="morris_chart_spring" class="morris-chart"></div>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default text-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    
+    <div class="modal fade modal-kuvcvs-durch-und-fehler" tabindex="-1" role="dialog" aria-labelledby="ModalLabelCVS" aria-hidden="true" style="display: none;" id="cvsmodal" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 class="modal-title" id="ModalLabelCVS">KuV CVS-Verträge Durchsatz & Fehler</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div id="morris_chart_cvs" class="morris-chart"></div>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default text-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    
+    
+    <!-- Footer -->
+    <footer class="footer container-fluid pl-30 pr-30">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Abili-T Runtime Overview</p>
+            </div>
+        </div>
+    </footer>
+    <!-- /Footer -->
+
+</div>
+{% endblock %}
